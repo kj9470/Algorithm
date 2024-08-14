@@ -1,7 +1,6 @@
 def solution(keymap, targets):
     answer = []
     dic = {}
-    
     key = "".join(targets)
     key = list(set(key))
     dic = dict.fromkeys(key, 999)
@@ -21,5 +20,4 @@ def solution(keymap, targets):
                 break
             tmp += int(dic[t])
         answer.append(tmp)
-
     return answer
