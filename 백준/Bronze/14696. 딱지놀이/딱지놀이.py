@@ -1,3 +1,17 @@
+def winner(n, a, b):
+    if a.count(n) > b.count(n):
+        print('A')
+        return
+    elif a.count(n) == b.count(n):
+        if n == 1:
+            print('D')
+            return
+        else:
+            winner(n - 1, a, b)
+    else:
+        print('B')
+        return
+
 N = int(input())
 a = []
 b = []
@@ -8,24 +22,4 @@ for i in range(N):
     a = a[1:]
     b = b[1:]
 
-    if a.count(4) > b.count(4):
-        print('A')
-    elif a.count(4) == b.count(4):
-        if a.count(3) > b.count(3):
-            print('A')
-        elif a.count(3) == b.count(3):
-            if a.count(2) > b.count(2):
-                print('A')
-            elif a.count(2) == b.count(2):
-                if a.count(1) > b.count(1):
-                    print('A')
-                elif a.count(1) == b.count(1):
-                    print('D')
-                else:
-                    print('B')
-            else:
-                print('B')
-        else:
-            print('B')
-    else:
-        print('B')
+    winner(4, a, b)
