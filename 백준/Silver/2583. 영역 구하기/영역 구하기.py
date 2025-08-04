@@ -5,7 +5,7 @@ input = sys.stdin.readline
 
 M, N, K = map(int, input().split())
 
-paper = [[0] * M for _ in range(N)]
+paper = [[True] * M for _ in range(N)]
 visited = [[False] * M for _ in range(N)]
 count = 0
 result = []
@@ -14,7 +14,7 @@ for _ in range(K):
     x, y, nx, ny = map(int, input().split())
     for i in range(x, nx):
         for j in range(y, ny):
-            paper[i][j] = -1
+            paper[i][j] = False
 
 
 def bfs(x, y, visited):
@@ -28,7 +28,7 @@ def bfs(x, y, visited):
         for dx, dy in move:
             nx, ny = x + dx, y + dy
             if 0 <= nx < N and 0 <= ny < M:
-                if not visited[nx][ny] and not paper[nx][ny] == -1:
+                if not visited[nx][ny] and paper[nx][ny]:
                     queue.append((nx, ny))
                     visited[nx][ny] = True
                     return_count += 1
@@ -36,7 +36,7 @@ def bfs(x, y, visited):
 
 for i in range(N):
     for j in range(M):
-        if not paper[i][j] == -1 and not visited[i][j]:
+        if paper[i][j] and not visited[i][j]:
             result.append(bfs(i, j, visited))
             count += 1
 
