@@ -13,20 +13,15 @@ for _ in range(N):
 
 def dfs(x, y, floor):
     visited[x][y] = True
-    if floor == '|':
-        for dx, dy in col_move:
-            nx, ny = x + dx, y + dy
-            if 0 <= nx < N and 0 <= ny < M:
-                if not visited[nx][ny] and floor == fields[nx][ny]:
-                    visited[nx][ny] = True
-                    dfs(nx, ny, floor)
-    else:
-        for dx, dy in row_move:
-            nx, ny = x + dx, y + dy
-            if 0 <= nx < N and 0 <= ny < M:
-                if not visited[nx][ny] and floor == fields[nx][ny]:
-                    visited[nx][ny] = True
-                    dfs(nx, ny, floor)
+
+    dirs = col_move if floor == '|' else row_move
+
+    for dx, dy in dirs:
+        nx, ny = x + dx, y + dy
+        if 0 <= nx < N and 0 <= ny < M:
+            if not visited[nx][ny] and fields[nx][ny] == floor:
+                dfs(nx, ny, floor)
+
 
 for x in range(N):
     for y in range(M):
