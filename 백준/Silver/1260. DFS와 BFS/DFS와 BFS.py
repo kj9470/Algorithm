@@ -1,35 +1,39 @@
+from collections import deque
+import sys
+input = sys.stdin.readline
+
 N, M, V = map(int, input().split())
 
-graph = [[0] * (N + 1) for _ in range(N + 1)]
-visited = [0 for _ in range(N + 1)]
+node = [[0] * (N + 1) for _ in range(N + 1)]
+visited = [False] * (N + 1)
 
-for i in range(M):
-    a, b = map(int, input().split())
-    graph[a][b] = graph[b][a] = 1
+for _ in range(M):
+    A, B = map(int, input().split())
+    node[A][B] = 1
+    node[B][A] = 1
 
 def reset():
-    for i in range(N + 1):
-        visited[i] = 0
+    for i in range(1, N + 1):
+        visited[i] = False
+    print()
 def dfs(V):
-    visited[V] = 1
+    visited[V] = True
     print(V, end=' ')
     for i in range(1, N + 1):
-        if graph[V][i] == 1 and visited[i] == 0:
+        if not visited[i] and node[V][i] == 1:
             dfs(i)
 
 def bfs(V):
-    queue = [V]
-    visited[V] = 1
+    queue = deque([V])
+    visited[V] = True
     while queue:
-        V = queue.pop(0)
-        print(V, end=' ')
+        x = queue.popleft()
+        print(x, end=' ')
         for i in range(1, N + 1):
-            if(visited[i] == 0 and graph[V][i] == 1):
+            if not visited[i] and node[x][i] == 1:
                 queue.append(i)
-                visited[i] = 1
+                visited[i] = True
 
-reset()
 dfs(V)
-print()
 reset()
 bfs(V)
