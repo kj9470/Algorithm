@@ -1,2 +1,2 @@
 N = input()
-print("Your socre is", N, "point.")
+print("Your score is", N, "point.")
