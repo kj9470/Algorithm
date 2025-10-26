@@ -21,6 +21,33 @@ def is_leap_year(Y):
             return True
 
 def is_day(Y, M, D):
+    if is_leap_year(Y):
+        if M in m29:
+            if D <= 29:
+                return True
     if M in m31:
         if D <= 31:
             return True
+    if M in m30:
+        if D <= 30:
+            return True
+    if M in m28:
+        if D <= 28:
+            return True
+    else:
+        return False
+
+def season(M):
+    if M in spring:
+        return 'Spring'
+    elif M in summer:
+        return 'Summer'
+    elif M in fall:
+        return 'Fall'
+    else:
+        return 'Winter'
+
+if is_day(Y, M, D):
+    print(season(M))
+else:
+    print(-1)
