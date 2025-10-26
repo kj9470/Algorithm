@@ -2,15 +2,20 @@ n1, n2 = map(int, input().split())
 a = list(map(int, input().split()))
 b = list(map(int, input().split()))
 
-def check(a, b):
-    for i in range(len(a)):
-        for j in range(len(b)):
-            if a[i] != b[j]:
-                return False
+def same(n):
+    for i in range(n2):
+        if a[i + n] != b[i]: # n번째 인덱스부터 시작
+            return False
     return True
 
+def subsequence():
+    for i in range(n1 - n2 + 1):
+        if same(i):
+            return True
+    return False
 
-if check(a, b):
+
+if subsequence():
     print('Yes')
 else:
     print('No')
