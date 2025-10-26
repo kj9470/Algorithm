@@ -3,12 +3,12 @@ a = list(map(int, input().split()))
 b = list(map(int, input().split()))
 
 def check(a, b):
-    for i in range(len(a)- 1):
-        for j in range(len(b) - 1):
-            if a[i] == b[j]:
-                if a[i + 1] == b[j + 1]:
-                    return True
-    return False
+    for i in range(len(a)):
+        for j in range(len(b)):
+            if a[i] != b[j]:
+                return False
+    return True
+
 
 if check(a, b):
     print('Yes')
