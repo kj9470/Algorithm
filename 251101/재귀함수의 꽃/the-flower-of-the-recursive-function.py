@@ -7,4 +7,4 @@ def recursion(N):
     recursion(N - 1)
     print(N, end=' ')
 
-recursion(5)
+recursion(N)
