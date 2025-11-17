@@ -8,9 +8,9 @@ while True:
     if m1 == m2 and d1 == d2:
         break
     
-    if d1 == month_days[month_idx]:
+    if d1 > month_days[month_idx]:
         m1 += 1
-        d1 = 0
+        d1 = 1
         result += 1
         month_idx += 1
     
