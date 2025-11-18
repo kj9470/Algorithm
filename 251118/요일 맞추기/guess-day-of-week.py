@@ -11,4 +11,4 @@ def days(m, d):
     return day
 
 result = days(m2, d2) - days(m1, d1)
-print(week[(result + 7) % 7])
+print(week[result % 7])
