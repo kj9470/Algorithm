@@ -6,7 +6,7 @@ week = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 def days(m, d):
     day = 0
     for i in range(1, m):
-        day += month[m]
+        day += month[i]
     day += d
     return day
 
