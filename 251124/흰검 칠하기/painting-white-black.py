@@ -1,5 +1,5 @@
 n = int(input())
-MAX_N = 10000
+MAX_N = 100000
 arr = [0 for _ in range(2 * MAX_N + 1)]
 arr_w = [0] * (2 * MAX_N + 1)
 arr_b = [0] * (2 * MAX_N + 1)
