@@ -1,12 +1,12 @@
 n = int(input())
-commands = [tuple(input().split()) for _ in range(n)]
 MAX_N = 10000
 arr = [0 for _ in range(2 * MAX_N + 1)]
 arr_w = [0] * (2 * MAX_N + 1)
 arr_b = [0] * (2 * MAX_N + 1)
 idx = MAX_N
 
-for x, d in commands:
+for _ in range(n):
+    x, d = tuple(input().split())
     x = int(x)
     if d == 'L':
         while x > 0:
