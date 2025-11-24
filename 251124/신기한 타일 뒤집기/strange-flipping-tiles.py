@@ -13,13 +13,17 @@ idx = MAX_N
 for x, d in commands:
     x = int(x)
     if d == 'L':
-        for _ in range(x):
-            idx -= 1
+        while x > 0:
             arr[idx] = 1
+            x -= 1
+            if x:
+                idx -= 1
     else:
-        for _ in range(x):
+        while x > 0:
             arr[idx] = 2
-            idx += 1
+            x -= 1
+            if x:
+                idx += 1
 
 w, b = 0, 0
 for i in range(len(arr)):
