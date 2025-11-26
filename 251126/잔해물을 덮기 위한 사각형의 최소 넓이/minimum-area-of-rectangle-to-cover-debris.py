@@ -5,12 +5,12 @@ x1[1], y1[1], x2[1], y2[1] = map(int, input().split())
 OFFSET = 1000
 arr = [[0] * (OFFSET * 2 + 1) for _ in range(OFFSET * 2 + 1)]
 
-for i in range(x1[0], x2[0] + 1):
-    for j in range(y1[0], y2[0] + 1):
+for i in range(x1[0], x2[0]):
+    for j in range(y1[0], y2[0]):
         arr[i + OFFSET][j + OFFSET] = 1
 
-for i in range(x1[1], x2[1] + 1):
-    for j in range(y1[1], y2[1] + 1):
+for i in range(x1[1], x2[1]):
+    for j in range(y1[1], y2[1]):
         arr[i + OFFSET][j + OFFSET] = 2
 
 min_x = OFFSET * 2 + 1
@@ -31,8 +31,8 @@ for x in range(len(arr)):
                 max_y = y
 
 count = 0
-for x in range(min_x, max_x):
-    for y in range(min_y, max_y):
+for x in range(min_x, max_x + 1):
+    for y in range(min_y, max_y + 1):
         count += 1
 
 print(count)
