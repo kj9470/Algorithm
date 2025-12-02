@@ -34,6 +34,8 @@ while time <= T:
             if i < n:
                 remain = t_a[i]
                 dir = d_a[i]
+    else:
+        pos_a[time] = pos_a[time - 1]
     time += 1
 
 
@@ -47,9 +49,11 @@ while time <= T:
         remain -= 1
         if remain == 0:
             i += 1
-            if i < n:
+            if i < m:
                 remain = t_b[i]
                 dir = d_b[i]
+    else:
+        pos_b[time] = pos_b[time - 1]
     time += 1
 
 count = 0
