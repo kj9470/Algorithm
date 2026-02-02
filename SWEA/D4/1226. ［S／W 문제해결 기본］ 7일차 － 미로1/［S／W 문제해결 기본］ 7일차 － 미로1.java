@@ -2,64 +2,81 @@ import java.io.*;
 import java.util.*;
 
 public class Solution {
-	static int[] dx = {-1, 0, 1, 0};
-	static int[] dy = {0, 1, 0, -1};
-    static int N = 16;
-	static int[][] map = new int[N][N];
-	static boolean[][] v = new boolean[N][N];
-    static boolean result = false;
-	
-	public static boolean bfs(int i, int j) {
-		ArrayDeque<int[]> q = new ArrayDeque<>();
-		v[i][j] = true;
-		q.offer(new int[] {i, j});
-		while (!q.isEmpty()) {
-			int[] xy = q.poll();
-			i = xy[0];
-			j = xy[1];
-			for (int d = 0; d < 4; d++) {
-				int nx = i + dx[d];
-				int ny = j + dy[d];
-				if (0 <= nx && nx < N && 0 <= ny && ny < N && !v[nx][ny]) {
-					if (map[nx][ny] == 3) {
-						return true;
-					}
-					if (map[nx][ny] == 0) {
-						v[nx][ny] = true;
-						q.offer(new int[] {nx, ny});
-					}
-				}
-			}
-		}
-		return false;
-	}
-	
-	public static void main(String[] args) throws IOException {
-	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	    StringTokenizer st;
-	
-	    int T = 10;
-	    for (int t = 1; t <= T; t++) {
-	    	String a = br.readLine();
-	    	
-		    for (int i = 0; i < N; i++) {
-			    String str = br.readLine();
-			    for (int j = 0; j < N; j++) {
-			    	map[i][j] = str.charAt(j) - '0'; //Integer.parseInt(st.nextToken());
-			    }
-		    }
-		    
-		    result = false;
-		    v = new boolean[N][N];
-		    int i = 1;
-		    int j = 1;
-		    result = bfs(i, j);
-		    
-		    if (result) {
-		    	System.out.println("#" + t + " " + 1);
-		    } else {
-		    	System.out.println("#" + t + " " + 0);
-		    }
-	    }
-	}
+
+    private static final int N = 16;
+    private static final int[] DX = {-1, 0, 1, 0};
+    private static final int[] DY = {0, 1, 0, -1};
+
+    private static int[][] map;
+    private static boolean[][] visited;
+
+    private static boolean bfs(int sx, int sy) {
+        Deque<int[]> q = new ArrayDeque<>();
+        visited[sx][sy] = true;
+        q.offer(new int[]{sx, sy});
+
+        while (!q.isEmpty()) {
+            int[] cur = q.poll();
+            int x = cur[0], y = cur[1];
+
+            for (int d = 0; d < 4; d++) {
+                int nx = x + DX[d];
+                int ny = y + DY[d];
+
+                if (!inRange(nx, ny) || visited[nx][ny]) continue;
+
+                if (map[nx][ny] == 3) return true;
+                if (map[nx][ny] != 0) continue;
+
+                visited[nx][ny] = true;
+                q.offer(new int[]{nx, ny});
+            }
+        }
+        return false;
+    }
+
+    private static boolean inRange(int x, int y) {
+        return 0 <= x && x < N && 0 <= y && y < N;
+    }
+
+    private static int[] findStart() {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (map[i][j] == 2) return new int[]{i, j};
+            }
+        }
+        return new int[]{1, 1};
+    }
+
+    private static void readMap(BufferedReader br) throws IOException {
+        map = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            String line = br.readLine().trim();
+            for (int j = 0; j < N; j++) {
+                map[i][j] = line.charAt(j) - '0';
+            }
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        final int T = 10;
+        StringBuilder sb = new StringBuilder();
+
+        for (int tc = 1; tc <= T; tc++) {
+            br.readLine();
+
+            readMap(br);
+            visited = new boolean[N][N];
+
+            int[] start = findStart();
+            boolean result = bfs(start[0], start[1]);
+
+            sb.append('#').append(tc).append(' ')
+              .append(result ? 1 : 0).append('\n');
+        }
+
+        System.out.print(sb.toString());
+    }
 }
