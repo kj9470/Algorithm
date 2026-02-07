@@ -15,8 +15,6 @@ public class Solution {
             return;
         }
 
-        maxScore = Math.max(score, maxScore);
-
         dfs(recentKal + kal[index], score + scores[index], index + 1);
         dfs(recentKal, score, index + 1);
     }
