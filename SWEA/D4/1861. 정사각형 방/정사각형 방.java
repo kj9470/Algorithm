@@ -5,7 +5,6 @@ public class Solution {
     static int N;
     static int[][] map;
     static boolean[][] visited;
-    static int count = 0;
     static int[] dx = {0, 0, -1, 1};
     static int[] dy = {1, -1, 0, 0};
     static int maxCount;
