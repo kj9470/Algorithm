@@ -18,15 +18,14 @@ public class Solution {
         for (int d = r; d <= r + 1 && d < 4; d++) {
             int nx = x + dx[d];
             int ny = y + dy[d];
-            int nt = turnCount + ((d == r) ? 0 : 1);
-            if (nx == startX && ny == startY && nt == 3 && count >= 4) {
+            if (nx == startX && ny == startY && count >= 4) {
                 maxCount = Math.max(count, maxCount);
                 continue;
             }
             if (!checkMap(nx, ny)) continue;
             if (v[nx][ny]) continue;
             if (deserts[map[nx][ny]]) continue;
-            dfs(nx, ny, d, count + 1, nt);
+            dfs(nx, ny, d, count + 1, turnCount);
         }
         v[x][y] = false;
         deserts[map[x][y]] = false;
