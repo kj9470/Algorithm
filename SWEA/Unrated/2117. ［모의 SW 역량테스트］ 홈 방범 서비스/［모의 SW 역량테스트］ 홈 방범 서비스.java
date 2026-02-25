@@ -11,7 +11,6 @@ public class Solution {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 if (Math.abs(x - i) + Math.abs(y - j) < k) {
-                    if (!check(i, j)) continue;
                     if (map[i][j] == 1) {
                         home++;
 //                        System.out.println(i + " " + j + "??" + map[i][j]);
@@ -20,11 +19,6 @@ public class Solution {
             }
         }
         return home;
-    }
-
-    static boolean check(int x, int y) {
-        if (x < 0 || x >= N || y < 0 || y >= N) return false;
-        return true;
     }
 
     public static void main(String[] args) throws Exception {
