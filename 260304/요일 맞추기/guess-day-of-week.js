@@ -5,21 +5,24 @@ const [m1, d1, m2, d2] = input[0].split(" ").map(Number);
 const days = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const date = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-let diff = 0;
+const convertToDays = (m, d) => {
+    let totalDays = 0;
 
-if (m1 === m2) {
-    diff = d2 - d1;
-} else {
-    // 시작 달
-    diff += (days[m1] - d1);
-
-    for (let m = m1 + 1; m <= m2 - 1; m++) {
-        diff += days[m];
+    for (let i = 1; i < m; i++) {
+        totalDays += days[i];
     }
 
-    // 끝나는 달
-    diff += d2;
+    totalDays += d;
+
+    return totalDays;
 }
 
-const answer = date[((diff % 7) + 7) % 7];
-console.log(answer);
+let days1 = convertToDays(m1, d1);
+let days2 = convertToDays(m2, d2);
+
+let diff = days2 - days1;
+while (diff < 0) {
+    diff += 7;
+}
+ 
+console.log(date[diff % 7]);
