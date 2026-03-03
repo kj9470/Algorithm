@@ -6,24 +6,15 @@ const [m1, d1, m2, d2] = input[0].split(' ').map(Number);
 const dates = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 const calculateDates = (month, day) => {
-    startMonth = 1;
-    startDay = 1;
-    totalDay = 0;
+    let totalDays = 0;
 
-    while (true) {
-        if (startMonth === month && startDay === day) {
-            break;
-        }
-
-        totalDay += 1;
-        startDay += 1;
-
-        if (startDay > dates[startMonth]) {
-            startMonth += 1;
-            startDay = 1;
-        }
+    for (let i = 1; i < month; i++) {
+        totalDays += dates[i];
     }
-    return totalDay;
+
+    totalDays += day;
+
+    return totalDays;
 }
 
 const daySum1 = calculateDates(m1, d1);
