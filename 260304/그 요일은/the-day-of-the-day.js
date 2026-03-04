@@ -1,8 +1,8 @@
 const fs = require("fs");
 const input = fs.readFileSync(0).toString().trim().split('\n');
 
-const dates = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-const days = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+const DATES_IN_MONTH = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const DAYS_OF_YEAR = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 const [m1, d1, m2, d2] = input[0].split(' ').map(Number);
 const A = input[1];
@@ -11,7 +11,7 @@ const calculateDays = (m, d) => {
     let totalDays = 0;
 
     for (let i = 1; i < m; i++) {
-        totalDays += days[i];
+        totalDays += DAYS_OF_YEAR[i];
     }
 
     totalDays += d;
@@ -22,14 +22,17 @@ const calculateDays = (m, d) => {
 const totalDays1 = calculateDays(m1, d1);
 const totalDays2 = calculateDays(m2, d2);
 
-const diff = totalDays2 - totalDays1;
-let dateIdx = dates.indexOf(A);
+const diff = totalDays2 - totalDays1 + 1;
 
-let answer = 0;
-if (dateIdx > (diff % 7)) {
-    answer += 1
+let targetIdx = DATES_IN_MONTH.indexOf(A);
+let answer = Math.floor(diff / 7); // 완전한 일주일의 수
+
+let leftover = diff % 7;
+for (let i = 0; i < leftover; i++) {
+    let idx = i % 7;
+    if (idx === targetIdx) {
+        answer += 1;
+    }
 }
 
-answer += diff / 7;
-
-console.log(Math.ceil(answer));
+console.log(answer);
