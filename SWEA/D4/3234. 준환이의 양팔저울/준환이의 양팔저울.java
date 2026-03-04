@@ -1,13 +1,13 @@
 import java.io.*;
 import java.util.*;
-
+ 
 public class Solution {
     static int N;
     static int[] weights;
     static int result;
     static boolean[] v;
     static int weightSum;
-
+ 
     static int factorial(int n) {
         int fn = 1;
         for (int i = 1; i <= n; i++) {
@@ -15,7 +15,7 @@ public class Solution {
         }
         return fn;
     }
-
+ 
     static void dfs(int count, int left, int right, int sum) {
         if (left < right) {
             return;
@@ -40,11 +40,11 @@ public class Solution {
             v[i] = false;
         }
     }
-
+ 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
-
+ 
         int T = Integer.parseInt(br.readLine());
         for (int t  = 1; t <= T; t++) {
             N = Integer.parseInt(br.readLine());
