@@ -7,7 +7,7 @@ for (let i = 1; i <= n; i++) {
     segments.push(input[i].split(' ').map(Number));
 }
 
-let straightLine = Array(100).fill(0);
+let straightLine = Array(101).fill(0);
 for (let [start, end] of segments) {
     for (let i = start; i < end; i++) {
         straightLine[i] += 1;
