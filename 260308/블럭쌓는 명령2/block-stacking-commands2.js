@@ -7,7 +7,7 @@ let seq = Array(n).fill(0);
 
 for ([start, end] of segments) {
     for (let i = start; i <= end; i++) {
-        seq[i] += 1;
+        seq[i - 1] += 1;
     }
 }
 
