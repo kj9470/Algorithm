@@ -2,60 +2,63 @@ import java.io.*;
 import java.util.*;
 
 public class Solution {
-    static int N;
-    static int[] x;
-    static int[] y;
-    static double E;
-
-    static double cost(int x1, int y1, int x2, int y2) {
-        double x = x1 - x2;
-        double y = y1 - y2;
-        double d = (x * x) + (y * y);
-        return d * E;
-    }
-
+	static int N;
+	static double E;
+	static long[][] islands;
+	
+	static long calcDist(long[] a, long[] b) {
+		return (long) Math.pow(a[0] - b[0], 2) + (long) Math.pow(a[1] - b[1], 2);
+	}
+	
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
+    	StringTokenizer st;
+    	
+    	int T = Integer.parseInt(br.readLine());
 
-        int T = Integer.parseInt(br.readLine());
-        for (int t  = 1; t <= T; t++) {
+        for (int t = 1; t <= T; t++) {
             N = Integer.parseInt(br.readLine());
-            x = new int[N]; y = new int[N];
+            islands = new long[N][2];
+            
             st = new StringTokenizer(br.readLine());
             for (int i = 0; i < N; i++) {
-                x[i] = Integer.parseInt(st.nextToken());
-            }
+				islands[i][0] = Long.parseLong(st.nextToken());
+			}
+            
             st = new StringTokenizer(br.readLine());
             for (int i = 0; i < N; i++) {
-                y[i] = Integer.parseInt(st.nextToken());
-            }
+				islands[i][1] = Long.parseLong(st.nextToken());
+			}
+            
             E = Double.parseDouble(br.readLine());
-
+        	
             boolean[] v = new boolean[N];
-            double[] P = new double[N]; Arrays.fill(P, Double.MAX_VALUE);
-            P[0] = 0.0;
+            long[] dist = new long[N]; Arrays.fill(dist, Long.MAX_VALUE);
+            dist[0] = 0;
+            long mst = 0;
             int cnt = 0;
-            double mst = 0.0;
+            
             for (int i = 0; i < N; i++) {
-                int minVertex = -1;
-                double min = Double.MAX_VALUE;
-                for (int j = 0; j < N; j++) {
-                    if (!v[j] && min > P[j]) {
-                        min = P[j];
-                        minVertex = j;
-                    }
-                }
-                v[minVertex] = true;
-                mst += min;
-                if (cnt++ == N - 1) break;
-                for (int j = 0; j < N; j++) {
-                    if (v[j]) continue;
-                    double cost = cost(x[j], y[j], x[minVertex], y[minVertex]);
-                    if (P[j] > cost) P[j] = cost;
-                }
-            }
-            System.out.println("#" + t + " " + Math.round(mst));
+            	long min = Long.MAX_VALUE;
+            	int minVertex = -1;
+            	for (int j = 0; j < N; j++) {
+					if(!v[j] && min > dist[j]) {
+						min = dist[j]; minVertex = j;
+					}
+				}
+            	
+            	v[minVertex] = true;
+            	mst += min;
+            	if (cnt++ == N - 1) { break; }
+            	
+            	for (int j = 0; j < N; j++) {
+					if (!v[j] && dist[j] > calcDist(islands[minVertex], islands[j])) {
+						dist[j] = calcDist(islands[minVertex], islands[j]);
+					}
+				}
+			}
+            long result = Math.round(mst * E);
+            System.out.println("#" + t + " " + result);
         }
     }
 }
