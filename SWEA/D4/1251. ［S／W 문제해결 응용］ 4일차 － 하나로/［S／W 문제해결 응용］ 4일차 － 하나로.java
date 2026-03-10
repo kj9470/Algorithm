@@ -36,10 +36,10 @@ public class Solution {
             double[] P = new double[N]; Arrays.fill(P, Double.MAX_VALUE);
             P[0] = 0.0;
             int cnt = 0;
-            Double mst = 0.0;
+            double mst = 0.0;
             for (int i = 0; i < N; i++) {
                 int minVertex = -1;
-                Double min = Double.MAX_VALUE;
+                double min = Double.MAX_VALUE;
                 for (int j = 0; j < N; j++) {
                     if (!v[j] && min > P[j]) {
                         min = P[j];
@@ -51,7 +51,7 @@ public class Solution {
                 if (cnt++ == N - 1) break;
                 for (int j = 0; j < N; j++) {
                     if (v[j]) continue;
-                    Double cost = cost(x[j], y[j], x[minVertex], y[minVertex]);
+                    double cost = cost(x[j], y[j], x[minVertex], y[minVertex]);
                     if (P[j] > cost) P[j] = cost;
                 }
             }
