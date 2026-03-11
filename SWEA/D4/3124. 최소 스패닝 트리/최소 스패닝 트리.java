@@ -3,25 +3,14 @@ import java.util.*;
 
 public class Solution {
     static int V, E;
-    static int[] parents;
+    static class Edge {
+        int to;
+        int cost;
 
-    static void makeSets() {
-        for (int i = 1; i <= V; i++) {
-            parents[i] = i;
+        Edge(int to, int cost) {
+            this.to = to;
+            this.cost = cost;
         }
-    }
-
-    static int findSet(int x) {
-        if (parents[x] == x) return x;
-        return parents[x] = findSet(parents[x]);
-    }
-
-    static boolean union(int x, int y) {
-        int xRoot = findSet(x);
-        int yRoot = findSet(y);
-        if (xRoot == yRoot) return false;
-        parents[yRoot] = xRoot;
-        return true;
     }
 
     public static void main(String[] args) throws Exception {
@@ -33,33 +22,45 @@ public class Solution {
             st = new StringTokenizer(br.readLine());
             V = Integer.parseInt(st.nextToken());
             E = Integer.parseInt(st.nextToken());
-            parents = new int[V + 1];
-            List<int[]> G = new ArrayList<>();
-            int A, B, C;
 
+            List<Edge>[] graph = new ArrayList[V + 1];
+            for (int i = 0; i <= V; i++) {
+                graph[i] = new ArrayList<>();
+            }
+            int A, B, C;
             for (int i = 0; i < E; i++) {
                 st = new StringTokenizer(br.readLine());
                 A = Integer.parseInt(st.nextToken());
                 B = Integer.parseInt(st.nextToken());
                 C = Integer.parseInt(st.nextToken());
-                G.add(new int[]{A, B, C});
+
+                graph[A].add(new Edge(B, C));
+                graph[B].add(new Edge(A, C));
             }
 
-            G.sort(Comparator.comparingInt(a -> a[2]));
-            makeSets();
+            boolean[] v = new boolean[V + 1];
+            PriorityQueue<Edge> pq = new PriorityQueue<>((a, b) -> Integer.compare(a.cost, b.cost));
 
-            long count = 0, result = 0;
-            for (int[] e: G) {
-                int u = e[0];
-                int v = e[1];
-                int w = e[2];
+            long result = 0;
+            int count = 0;
 
-                if (union(u, v)) {
-                    result += w;
-                    count++;
-                    if (count == V - 1) break;
+            pq.offer(new Edge(1, 0));
+
+            while (!pq.isEmpty() && count < V) {
+                Edge cur = pq.poll();
+                if (v[cur.to]) continue;
+
+                v[cur.to] = true;
+                result += cur.cost;
+                count++;
+
+                for (Edge next: graph[cur.to]) {
+                    if(!v[next.to]) {
+                        pq.offer(new Edge(next.to, next.cost));
+                    }
                 }
             }
+
             System.out.println("#" + t + " " + result);
         }
     }
