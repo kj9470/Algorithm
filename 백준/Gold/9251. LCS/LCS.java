@@ -2,34 +2,31 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static String a;
-    static String b;
-    static int N, M;
-    static int[][] memo;
+    static String A, B;
+    static int MAX_N = 1000;
+    static boolean[][] isCached = new boolean[MAX_N + 1][MAX_N + 1];
+    static int[][] cacheValue = new int[MAX_N + 1][MAX_N + 1];
 
-    static void lcs(int i, int j) {
-        if (a.charAt(i - 1) == b.charAt(j - 1)) {
-            memo[i][j] = memo[i - 1][j - 1] + 1;
-        } else {
-            memo[i][j] = Math.max(memo[i - 1][j], memo[i][j - 1]);
+    static int dp(int i, int j) {
+        if (i == A.length() || j == B.length()) return 0;
+        if (!isCached[i][j]) {
+            isCached[i][j] = true;
+            if (A.charAt(i) == B.charAt(j)) {
+                cacheValue[i][j] = dp(i + 1, j + 1) + 1;
+            } else {
+                cacheValue[i][j] = Math.max(dp(i + 1, j), dp(i, j + 1));
+            }
         }
+        return cacheValue[i][j];
     }
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
 
-        a = br.readLine();
-        b = br.readLine();
-        N = a.length(); M = b.length();
+        A = br.readLine();
+        B = br.readLine();
 
-        memo = new int[N + 1][M + 1];
+        System.out.println(dp(0, 0));
 
-        for (int i = 1; i <= N; i++) {
-            for (int j = 1; j <= M; j++) {
-                lcs(i, j);
-            }
-        }
-        System.out.println(memo[N][M]);
     }
 }
