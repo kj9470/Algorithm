@@ -16,6 +16,7 @@ rect1X1 = Number(rect1X1) + OFFSET;
 rect1X2 = Number(rect1X2) + OFFSET;
 rect1Y1 = Number(rect1Y1) + OFFSET;
 rect1Y2 = Number(rect1Y2) + OFFSET;
+
 rect2X1 = Number(rect2X1) + OFFSET;
 rect2X2 = Number(rect2X2) + OFFSET;
 rect2Y1 = Number(rect2Y1) + OFFSET;
@@ -54,6 +55,6 @@ let answer = 0;
 if (!isExist) {
     console.log(0);
 } else {
-    answer = (maxX - minX) * (maxY - minY);
+    answer = (maxX - minX + 1) * (maxY - minY + 1);
     console.log(answer);
 }
