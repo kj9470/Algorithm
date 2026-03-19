@@ -4,9 +4,9 @@ const input = fs.readFileSync(0).toString().trim().split('\n');
 const n = Number(input[0]);
 const arr = input.slice(1, n + 1).map(Number);
 
-let count = 0, answer = 0;
+let count = 1, answer = 0;
 for (let i = 0; i < arr.length; i++) {
-    if (i >= 1 && arr[i] === arr[i - 1]) {
+    if (arr[i] === arr[i - 1]) {
         count += 1;
     } else {
         count = 1;
