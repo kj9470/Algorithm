@@ -11,7 +11,7 @@ for (let i = 0; i < arr.length; i++) {
     } else if (arr[i] > t) {
         count = 1;
     } else {
-        count = 0;
+        count = 0
     }
 
     answer = Math.max(count, answer);
