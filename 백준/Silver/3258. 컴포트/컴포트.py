@@ -1,21 +1,17 @@
+import sys
+input = sys.stdin.readline
+
 N, Z, M = map(int, input().split())
-mm = set(map(int, input().split()))
 
-for r in range(1, N + 1):
-    i = 1
-    visited = set()
+obstacle = list(map(int, input().split()))
 
-    while True:
-        if i == Z:
-            print(r)
+for i in range(1, N):
+    idx = 0
+    for j in range(N):
+        if idx + 1 in obstacle:
+            break
+        if idx + 1 == Z:
+            print(i)
             exit()
-
-        if i in mm:
-            break
-
-        if i in visited:
-            break
-        visited.add(i)
-
-        i += r
-        i = (i - 1) % N + 1
+        else:
+            idx = (idx + i) % N
