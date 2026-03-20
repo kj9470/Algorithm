@@ -1,27 +1,21 @@
-import sys
-input = sys.stdin.readline
-
 N, Z, M = map(int, input().split())
+mm = set(map(int, input().split()))
 
-obstacle = list(map(int, input().split()))
+for r in range(1, N + 1):
+    i = 1
+    visited = set()
 
-minIdx = N + 1
+    while True:
+        if i == Z:
+            print(r)
+            exit()
 
-found = False
-
-for i in range(1, N):
-    if found:
-        break
-    idx = 0
-    for j in range(N):
-        if idx + 1 in obstacle:
+        if i in mm:
             break
-        if idx + 1 == Z:
-            found = True
-            minIdx = i
+
+        if i in visited:
             break
-        else:
-            idx = (idx + i) % N
+        visited.add(i)
 
-print(minIdx)
-
+        i += r
+        i = (i - 1) % N + 1
