@@ -17,7 +17,7 @@ for (let move of movesA) {
     let [t, d] = move.split(' ');
     timeA += t;
 
-    for (let i = 0; i < t; i++) {
+    for (let i = 0; i < Number(t); i++) {
         if (d === 'R') {
             currentA += 1
         } else if (d === 'L') {
@@ -32,7 +32,7 @@ for (let move of movesB) {
     let [t, d] = move.split(' ');
     timeB += t;
 
-    for (let i = 0; i < t; i++) {
+    for (let i = 0; i < Number(t); i++) {
         if (d === 'R') {
             currentB += 1
         } else if (d === 'L') {
