@@ -13,7 +13,7 @@ let currentB = 0;
 let timeA = 0;
 let timeB = 0;
 
-for (move of movesA) {
+for (let move of movesA) {
     let [t, d] = move.split(' ');
     timeA += t;
 
@@ -28,7 +28,7 @@ for (move of movesA) {
     }
 }
 
-for (move of movesB) {
+for (let move of movesB) {
     let [t, d] = move.split(' ');
     timeB += t;
 
