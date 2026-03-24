@@ -47,6 +47,16 @@ for (move of movesB) {
 
 let answer = 0;
 let totalTime = Math.max(timeA, timeB);
+
+// 시간이 다를 경우 부족한 쪽에서 마지막 위치로 채워줘야 함
+while(posA.length <= totalTime) {
+    posA.push(posA[posA.length - 1]);
+}
+
+while(posB.length <= totalTime) {
+    posB.push(posB[posB.length - 1]);
+}
+
 for (let i = 0; i < totalTime; i++) {
     if (i >= 1 && posA[i - 1] !== posB[i - 1] && posA[i] === posB[i]) {
         answer += 1;
