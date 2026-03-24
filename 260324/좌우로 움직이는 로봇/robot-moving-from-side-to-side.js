@@ -7,41 +7,43 @@ const [n, m] = input[0].split(' ').map(Number);
 const movesA = input.slice(1, 1 + n);
 const movesB = input.slice(1 + n, 1 + n + m);
 
-let posA = Array.from({ length: MAX_SIZE }, () => 0);
-let posB = Array.from({ length: MAX_SIZE }, () => 0);
+let posA = Array.from({ length: MAX_SIZE + 1 }, () => 0);
+let posB = Array.from({ length: MAX_SIZE + 1 }, () => 0);
 
 let currentA = 0;
 let currentB = 0;
-let timeA = 0;
-let timeB = 0;
+let timeA = 1;
+let timeB = 1;
 
 for (let move of movesA) {
     let [t, d] = move.split(' ');
+    t = Number(t);
     timeA += t;
 
-    for (let i = 0; i < Number(t); i++) {
+    for (let i = 0; i < t; i++) {
         if (d === 'R') {
             currentA += 1
         } else if (d === 'L') {
             currentA -= 1;
         }
 
-        posA.push(currentA);
+        posA[timeA] = currentA;
     }
 }
 
 for (let move of movesB) {
     let [t, d] = move.split(' ');
+    t = Number(t);
     timeB += t;
 
-    for (let i = 0; i < Number(t); i++) {
+    for (let i = 0; i < t; i++) {
         if (d === 'R') {
             currentB += 1
         } else if (d === 'L') {
             currentB -= 1;
         }
 
-        posB.push(currentB);
+        posB[timeB] = currentB;
     }
 }
 
