@@ -50,11 +50,11 @@ for (let move of movesB) {
 // 시간이 다를 경우 부족한 쪽에서 마지막 위치로 채워줘야 함
 if (timeA < timeB) {
     for (let i = timeA; i <= timeB; i++) {
-        posA[i] = posA[timeA];
+        posA[i] = posA[timeA - 1];
     }
 } else if (timeA > timeB) {
     for (let i = timeB; i <= timeA; i++) {
-        posB[i] = posB[timeB];
+        posB[i] = posB[timeB - 1];
     }
 }
 
