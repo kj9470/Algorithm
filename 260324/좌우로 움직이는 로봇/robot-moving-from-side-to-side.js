@@ -1,3 +1,5 @@
+const MAX_SIZE = 1000000;
+
 const fs = require("fs");
 const input = fs.readFileSync(0).toString().trim().split('\n');
 
@@ -5,8 +7,8 @@ const [n, m] = input[0].split(' ').map(Number);
 const movesA = input.slice(1, 1 + n);
 const movesB = input.slice(1 + n, 1 + n + m);
 
-let posA = [0];
-let posB = [0];
+let posA = Array.from({ length: MAX_SIZE }, () => 0);
+let posB = Array.from({ length: MAX_SIZE }, () => 0);
 
 let currentA = 0;
 let currentB = 0;
@@ -49,11 +51,11 @@ let answer = 0;
 let totalTime = Math.max(timeA, timeB);
 
 // 시간이 다를 경우 부족한 쪽에서 마지막 위치로 채워줘야 함
-while(posA.length <= totalTime) {
+while (posA.length <= totalTime) {
     posA.push(posA[posA.length - 1]);
 }
 
-while(posB.length <= totalTime) {
+while (posB.length <= totalTime) {
     posB.push(posB[posB.length - 1]);
 }
 
