@@ -10,11 +10,9 @@ let answer = -1;
 for (let penaltyNum of penalizedPersons) {
     persons[penaltyNum] += 1;
 
-    for (let i = 0; i < n; i++) {
-        if (persons[i] >= k) {
-            answer = i;
-            break;
-        }
+    if (persons[penaltyNum] >= k) {
+        answer = penaltyNum;
+        break;
     }
 }
 
