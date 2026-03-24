@@ -27,7 +27,7 @@ for (let move of movesA) {
             currentA -= 1;
         }
 
-        posA[timeA] = currentA;
+        posA[i] = currentA;
     }
 }
 
@@ -43,7 +43,7 @@ for (let move of movesB) {
             currentB -= 1;
         }
 
-        posB[timeB] = currentB;
+        posB[i] = currentB;
     }
 }
 
