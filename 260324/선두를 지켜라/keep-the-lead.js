@@ -1,5 +1,3 @@
-const MAX_SIZE = 1000 * 1000;
-
 const fs = require("fs");
 const input = fs.readFileSync(0).toString().trim().split("\n");
 
@@ -7,22 +5,23 @@ const [n, m] = input[0].split(" ").map(Number);
 const aData = input.slice(1, n + 1).map(line => line.split(" ").map(Number));
 const bData = input.slice(n + 1, n + 1 + m).map(line => line.split(" ").map(Number));
 
-// 거리 = 속력 * 시간
-let aPos = [0]
+// A 시간에 따른 위치 배열
+let aPos = [0];
 let aCurrent = 0;
-for (let data of aData) {
-    let [v, t] = data;
+for (a of aData) {
+    let [v, t] = a;
 
+    // 시간에 따른 위치 저장
     for (let i = 0; i < t; i++) {
-        aCurrent += v; // 초가 1초니까 v만 더해도 됨
+        aCurrent += v;
         aPos.push(aCurrent);
     }
 }
 
 let bPos = [0];
 let bCurrent = 0;
-for (let data of bData) {
-    let [v, t] = data;
+for (b of bData) {
+    let [v, t] = b;
 
     for (let i = 0; i < t; i++) {
         bCurrent += v;
@@ -40,10 +39,11 @@ for (let i = 0; i < aPos.length; i++) {
     } else if (aPos[i] < bPos[i]) {
         currentLead = 'B';
     } else {
-        currentLead = '';
+        continue;
     }
 
-    if (lead !== '' && currentLead !== lead) {
+    // 선두가 바뀌었을 때
+    if (lead !== '' && currentLead != lead) {
         answer += 1;
     }
     lead = currentLead;
